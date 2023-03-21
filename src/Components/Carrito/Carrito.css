@@ -1,0 +1,102 @@
+.carrito-container {
+    position: relative;
+  }
+  
+  .mostrar-carrito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .carrito {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid gray;
+    padding: 10px;
+  }
+  
+  .carrito.show {
+    display: block;
+  }
+  
+  .carrito h2 {
+    font-size: 20px;
+    margin-top: 0;
+  }
+  
+  .carrito p {
+    margin: 5px 0;
+  }
+  
+  .carrito .producto {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .carrito .producto button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .carrito .total {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid gray;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  
+ 
+
+  .carrito .hacer-pedido {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    
+    .mostrar-carrito:hover {
+    background-color: #444;
+    }
+    
+    .carrito .producto:hover {
+    background-color: #f5f5f5;
+    }
+    
+    .carrito .producto:last-child {
+    border-bottom: none;
+    }
+    
+    .carrito .total p:first-child {
+    font-weight: bold;
+    }
+    
+    .carrito .vaciar-carrito {
+    background-color: red;
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    
+    .carrito .vaciar-carrito:hover {
+    background-color: #d33;
+    }
+  

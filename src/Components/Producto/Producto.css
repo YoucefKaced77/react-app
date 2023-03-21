@@ -1,0 +1,38 @@
+.producto {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid gray;
+    padding: 10px;
+  }
+  
+  .imagen {
+    margin-right: 20px;
+  }
+  
+  .imagen img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .detalles h3 {
+    font-size: 20px;
+    margin-top: 0;
+  }
+  
+  .detalles p {
+    margin: 5px 0;
+  }
+  
+  .detalles button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .detalles button:hover {
+    background-color: #444;
+  }
+  
