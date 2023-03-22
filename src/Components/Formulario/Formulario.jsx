@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Nav } from 'react-bootstrap';
 
 function Formulario() {
   return (
@@ -19,9 +20,11 @@ function Formulario() {
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
-      <Button href="/" variant="primary" type="submit">
-        Submit
-      </Button>
+      <Nav>
+      <Nav.Item as="li">
+        <Nav.Link href="/">Submit</Nav.Link>
+      </Nav.Item>
+      </Nav>
     </Form>
   );
 }

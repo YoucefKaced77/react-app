@@ -11,10 +11,48 @@ function Catalogo() {
   const {cesta1} = useContext(CestaContext);
   const setCesta1 = useContext(CestaContext).setCesta1;
 
-  function borraloboludo(id){
-    const nuevaCesta = cesta1.filter(producto => producto.nombre !== id);
+  function buscador(name) {
     console.log(cesta1)
-    setCesta1(nuevaCesta);
+    return cesta1.findIndex(elemento => elemento.nombre === name);
+  }  
+
+  function añadilo(product) {
+
+    const nuevaCesta = cesta1.filter(producto => producto.nombre !== product.id);
+
+    if(nuevaCesta.length == cesta1.length){
+      setCesta1([...cesta1,{ nombre:product.id  , precio:product.precio, cantidad:((product.cantidad)+1)}]);
+    }
+    else{
+      const userIndex = buscador(product.id);
+      console.log(userIndex)
+      if (userIndex === -1) return; // Si el elemento no se encuentra, no hacemos nada
+      const updatedCestas = [...cesta1]; // Copiar todo el array
+      const updatedCesta = { ...updatedCestas[userIndex] }; // Copiar solo el elemento que queremos actualizar
+      updatedCesta.cantidad = updatedCesta.cantidad + 1; // Actualizar la propiedad age
+      updatedCestas[userIndex] = updatedCesta; // Volver a agregar el elemento actualizado al array
+      setCesta1(updatedCestas); // Actualizar el estado
+    }
+  }  
+
+  function borraloboludo(product){
+
+    const userIndex = buscador(product.id);
+    console.log(userIndex)
+    if (userIndex === -1) return; // Si el elemento no se encuentra, no hacemos nada
+    const updatedCestas = [...cesta1]; // Copiar todo el array
+    const updatedCesta = { ...updatedCestas[userIndex] }; // Copiar solo el elemento que queremos actualizar
+    updatedCesta.cantidad = updatedCesta.cantidad - 1; // Actualizar la propiedad age
+    if (updatedCesta.cantidad < 1){
+      const nuevaCesta = cesta1.filter(producto => producto.nombre !== product.id);
+      setCesta1(nuevaCesta);
+    }
+    else{
+      updatedCestas[userIndex] = updatedCesta; // Volver a agregar el elemento actualizado al array
+      setCesta1(updatedCestas); // Actualizar el estado
+    }
+    
+    
   };
 
   useEffect(() => {
@@ -26,7 +64,8 @@ function Catalogo() {
                 id: key,
                 color: response.data[key].Color,
                 precio: response.data[key].Precio,
-                imagen: response.data[key].imagen
+                imagen: response.data[key].imagen,
+                cantidad: 0  
             })
         }
         //console.log(arrayProductos);
@@ -44,8 +83,8 @@ function Catalogo() {
         {products.map((product) => (
           <>
           <Producto nombre={product.id} precio={product.precio} imagen={product.imagen} color={product.color} />
-          <button onClick={() => setCesta1([...cesta1,{ nombre:product.id  , precio:product.precio}])}>Agregar al carrito</button>
-          <button onClick={() => borraloboludo(product.id)}>Borrar del carrito</button>
+          <button onClick={() => añadilo(product)}>Agregar al carrito</button>
+          <button onClick={() => borraloboludo(product)}>Borrar del carrito</button>
           </>
           
           //Producto es un componente que va a dar forma a cada producto con su estilo, imagen,...
