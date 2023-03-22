@@ -4,6 +4,7 @@ import "./Catalogo.css";
 import axios from "axios"
 import { useContext } from 'react';
 import { CestaContext } from '../../App';
+import { Button } from "react-bootstrap";
 
 function Catalogo() {
   const [products, setProducts] = useState([]);
@@ -83,8 +84,8 @@ function Catalogo() {
         {products.map((product) => (
           <>
           <Producto nombre={product.id} precio={product.precio} imagen={product.imagen} color={product.color} />
-          <button onClick={() => añadilo(product)}>Agregar al carrito</button>
-          <button onClick={() => borraloboludo(product)}>Borrar del carrito</button>
+          <Button variant="outline-info" onClick={() => añadilo(product)}>+</Button>
+          <Button variant="outline-warning" onClick={() => borraloboludo(product)}>-</Button>
           </>
           
           //Producto es un componente que va a dar forma a cada producto con su estilo, imagen,...
