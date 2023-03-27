@@ -1,0 +1,23 @@
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    color: #777;
+    padding: 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .left img {
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .right {
+    font-size: 14px;
+  }

@@ -40,8 +40,7 @@
     text-transform: uppercase;
     cursor: pointer;
   }
-  
-  button[type="submit"] {
+button[type="submit"] {
     background-color: #007bff;
     color: #fff;
   }

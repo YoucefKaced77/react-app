@@ -1,9 +1,9 @@
-import './Login.css';
 import axios from "axios";
+import './Registro.css';
 import { useState } from "react";
 import { Button, Col, Container, Row, Form } from "react-bootstrap";
 
-const Login = (props) => {
+const Registro = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,18 +15,14 @@ const Login = (props) => {
             password: password,
             returnSecureToken: true
         }
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAi4jyFRMmLTL6DuHMFgo7RZ1wmHhuefc8', authData)
+        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAi4jyFRMmLTL6DuHMFgo7RZ1wmHhuefc8', authData)
             .then((response) => {
                 //console.log(response);
                 props.actualizarLogin(true, response.data);
-                alert('El usuario se ha logueado correctamente');
+                alert('El usuario se ha registrado correctamente');
             }).catch((error) => {
                 alert('No se ha encontrado el usuario');
             })
-    }
-
-    const logoutHandler = () => {
-        props.actualizarLogin(false, {});
     }
 
     return (
@@ -46,18 +42,12 @@ const Login = (props) => {
                 </Row>
                 <Row className="mb-3">
                     <Col>
-                        <Button type='submit' variant="primary">LOGIN</Button>
-                    </Col>
-                    <Col>
-                        <Button variant="warning" onClick={logoutHandler}>LOGOUT</Button>
+                        <Button type='submit' variant="primary">REGISTRO</Button>
                     </Col>
                 </Row>
             </Container>
         </Form>
-
-
-
     )
 }
 
-export default Login;
+export default Registro;

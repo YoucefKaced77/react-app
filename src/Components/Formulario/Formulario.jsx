@@ -91,18 +91,21 @@ function RealizarPedido() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShow(false);
-      navigate("/");
-    }, 5000);
-    return () => clearTimeout(timer);
+    if (show){
+      const timer = setTimeout(() => {
+        setShow(false);
+        navigate("/");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+    
   }, [show, navigate]);
 
   const handleClose = () => setShow(false);
 
   return (
     <>
-      <Button onClick={() => setShow(true)}>Abrir Modal</Button>
+      <Button onClick={() => setShow(true)}>Finalizar Compra</Button>
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
