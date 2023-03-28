@@ -17,9 +17,9 @@ import Footer from "./Components/Footer/Footer";
 import Registro from "./Components/Registro/Registro";
 import Producto from './Components/Producto/Producto';
 import Logout from './Components/Logout/Logout';
-
-export const CestaContext = createContext({ cesta1: 0, setCesta1: () => { } });
-export const loginContext = createContext({ login: false, setLogin: () => { } });
+import loginContext from "./Store/loginContext"
+import CestaContext from "./Store/CestaContext"
+import Link from "react-router-dom"
 
 //Compaginar la parte de recarte con la mía  
 //como seccionar la base de datos
@@ -29,6 +29,7 @@ function App() {
   const [cesta1, setCesta1] = useState([]);
   const [login, setLogin] = useState(false);
   const [loginData, setLoginData] = useState({});
+  const [loginemail, setLoginEmail] = useState({});
 
   console.log(login)
 
@@ -37,37 +38,41 @@ function App() {
     setLoginData(loginData);
     localStorage.setItem('login', login);
     localStorage.setItem('loginData', loginData.idToken);
+    localStorage.setItem('loginemail', loginData.email);
   }
 
   useEffect(() => {
     if (localStorage.getItem('login') === 'true') {
       setLogin(true);
       setLoginData({ idToken: localStorage.getItem('loginData') });
+      setLoginData({ email: localStorage.getItem('loginemail') });
     }
   }, []);
 
   const contenidoProductos = <>
-    <CestaContext.Provider value={{ cesta1, setCesta1 }}>
+    {/* <CestaContext.Provider value={{ cesta1, setCesta1 }}> */}
       <Carrito />
       <Catalogo />
-    </CestaContext.Provider>
+    {/* </CestaContext.Provider> */}
   </>
 
   return (
     <>
       <loginContext.Provider value={{ login, setLogin }}>
-        <Header />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={ contenidoProductos } />
-            <Route path="/MisPedidos" element={<MisPedidos/>} />
-            <Route path="/Formulario" element={<Formulario/>} />
-            <Route path='/Login' element={<Login actualizarLogin={actualizarLogin} />} />
-            <Route path='/Registro' element={<Registro actualizarLogin={actualizarLogin} />} />
-            <Route path='/Logout' element={<Logout actualizarLogin={actualizarLogin} />} />
-          </Routes>
-        </BrowserRouter>
-        <Footer />
+        <CestaContext.Provider value={{ cesta1, setCesta1 }}>
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route path="/" element={contenidoProductos} />
+              <Route path="/MisPedidos" element={<MisPedidos />} />
+              <Route path="/Formulario" element={<Formulario />} />
+              <Route path='/Login' element={<Login actualizarLogin={actualizarLogin} />} />
+              <Route path='/Registro' element={<Registro actualizarLogin={actualizarLogin} />} />
+              <Route path='/Logout' element={<Logout actualizarLogin={actualizarLogin} />} />
+            </Routes>
+          </BrowserRouter>
+          <Footer />
+        </CestaContext.Provider>
       </loginContext.Provider>
 
     </>

@@ -9,7 +9,7 @@ const Logout = (props) => {
     const navega = useNavigate();
     props.actualizarLogin(false, {});
 
-    setTimeout(()=>navega('/'),1000);
+    navega('/');
 
     
 }

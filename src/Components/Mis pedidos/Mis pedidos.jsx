@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from 'react';
-import {loginContext} from '../../App';
+import loginContext from "../../Store/loginContext";
 
 
 function MisPedidos() {

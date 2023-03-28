@@ -4,12 +4,14 @@ import "./Header.css";
 import logo from './header_logo.png';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { loginContext } from "../../App";
+import loginContext from "../../Store/loginContext";
+import {useNavigate} from "react-router-dom"
 
 function Header() {
 
   const {login} = useContext(loginContext);
   const setLogin = useContext(loginContext).setLogin;
+  const navigate = useNavigate();
 
   return (
     <header>
@@ -20,22 +22,22 @@ function Header() {
 
       <Nav className="justify-content-end">  
         <Nav.Item>
-          <Nav.Link href='/'>Inicio</Nav.Link>
+          <Nav.Link onClick={() => navigate('/')}>Inicio</Nav.Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Nav.Link href="/MisPedidos">Mis pedidos</Nav.Link>
+          <Nav.Link onClick={() => navigate('/MisPedidos')}>Mis pedidos</Nav.Link>
         </Nav.Item>
         {login ? (
           <Nav.Item>
-            <Nav.Link href='/Logout' >Logout</Nav.Link>
+            <Nav.Link onClick={() => navigate('/Logout')}>Logout</Nav.Link>
           </Nav.Item>
         ) : (
           <Nav.Item>
-            <Nav.Link href='/Login'>Login</Nav.Link>
+            <Nav.Link onClick={() => navigate('/Login')}>Login</Nav.Link>
           </Nav.Item>
         )}
         <Nav.Item>
-          <Nav.Link href='/Registro'>Registro</Nav.Link>
+          <Nav.Link onClick={() => navigate('/Registro')}>Registro</Nav.Link>
         </Nav.Item>
       </Nav>
     </header>

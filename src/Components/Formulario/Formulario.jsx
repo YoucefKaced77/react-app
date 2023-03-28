@@ -6,8 +6,14 @@ import  {  useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import ReactDOM from "react-dom";
+import axios from 'axios';
+import CestaContext from "../../Store/CestaContext"
+import { useContext } from 'react';
 
 function Formulario() {
+
+  const {cesta1} = useContext(CestaContext);
+  const setCesta1 = useContext(CestaContext).setCesta1;
 
   const [paymentOption, setPaymentOption] = useState('');
   const [name, setName] = useState('');
@@ -16,6 +22,8 @@ function Formulario() {
   const [message, setMessage] = useState('');
   const [cp, setCP] = useState('');
   const [direccion, setDireccion] = useState('');
+
+  console.log("esta es la cesta despues de",cesta1)
 
   const handlePaymentChange = (e) => {
     setPaymentOption(e.target.value);
@@ -86,7 +94,32 @@ function Formulario() {
   );
 }
 
-function RealizarPedido() {
+function RealizarPedido(props) {
+
+  const {cesta1} = useContext(CestaContext);
+  const setCesta1 = useContext(CestaContext).setCesta1;
+
+  const preciototal=0;
+
+  
+   const totalCarrito = () => {
+     return cesta1.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
+   };
+
+  
+
+  const arrayPedidos = {
+    paymentOption: props.paymentOption,
+    name: props.name,
+    email: localStorage.getItem('loginemail'),
+    phone: props.phone,
+    message: props.message,
+    cp: props.cp,
+    direccion: props.direccion,
+    cesta: cesta1,
+    preciototal: totalCarrito()
+  }
+
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
@@ -103,9 +136,20 @@ function RealizarPedido() {
 
   const handleClose = () => setShow(false);
 
+  function insertFirebase() {
+    console.log(arrayPedidos)
+    axios.post('https://react-app-22010-default-rtdb.europe-west1.firebasedatabase.app/Pedidos.json?auth=' + localStorage.getItem('loginData'), arrayPedidos)
+      .then((response) => {
+        alert('El producto se ha insertado en la base de datos');
+      }).catch((error)=>{
+        alert('No se puede crear');
+      })
+    cesta1=[]
+  }
+
   return (
     <>
-      <Button onClick={() => setShow(true)}>Finalizar Compra</Button>
+      <Button onClick={() => { insertFirebase(); setShow(true); }}>Finalizar Compra</Button>
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>

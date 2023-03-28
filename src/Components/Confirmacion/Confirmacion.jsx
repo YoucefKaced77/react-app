@@ -4,7 +4,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useContext } from 'react';
-import { CestaContext } from '../../App';
+import CestaContext from '../../Store/CestaContext';
+import { useNavigate } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
 
 const style = {
   position: 'absolute',
@@ -24,7 +26,11 @@ export default function Confirmacion() {
   const setCesta1 = useContext(CestaContext).setCesta1;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+
+  function handleClose  () {
+    setOpen(false);
+  }
 
 
   const totalCarrito = () => {
@@ -55,9 +61,10 @@ export default function Confirmacion() {
               </div>
         </div>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            ¿ Estás seguro ? YA NO HABRÁ VUELTA ATRÁS 
+            ¿ Estás seguro ? YA NO HABRÁ VUELTA ATRÁS   
           </Typography>
-          <Button href="/Formulario" onClick={handleClose}>TRAMITAR PEDIDO</Button>
+          
+          <Button onClick={() => handleClose()}>TRAMITAR PEDIDO</Button>
         </Box>
       </Modal>
     </div>

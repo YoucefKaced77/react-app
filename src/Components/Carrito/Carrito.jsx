@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import "./Carrito.css"
 import { useContext } from 'react';
-import { CestaContext } from '../../App';
-import {loginContext} from '../../App';
+import CestaContext from "../../Store/CestaContext"
+import loginContext from "../../Store/loginContext"
 import Confirmacion from '../Confirmacion/Confirmacion';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Nav } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function MyVerticallyCenteredModal(props) {
 
@@ -15,10 +16,13 @@ function MyVerticallyCenteredModal(props) {
   const setCesta1 = useContext(CestaContext).setCesta1;
 
   const totalCarrito = () => {
+    console.log(cesta1)
+    console.log(cesta1.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0))
     return cesta1.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
   };
-  
-  
+  console.log("esta es la cesta antes de",cesta1)
+  const navigate = useNavigate();
+    
     return (
       <Modal
         {...props}
@@ -55,7 +59,7 @@ function MyVerticallyCenteredModal(props) {
         <Modal.Footer>
         <Nav>
           <Nav.Item as="li">
-            <Nav.Link href="/Formulario">Grabar Pedido</Nav.Link>
+            <Nav.Link onClick={() => navigate("/Formulario")}>Grabar Pedido</Nav.Link>
           </Nav.Item>
         </Nav>
         </Modal.Footer>
@@ -104,6 +108,8 @@ function Carrito() {
     return cesta1.reduce((total, producto) => total + (producto.cantidad), 0);
   }
 
+  const navigate = useNavigate();
+  
   return (
     <div className="carrito-container">
       <button className="mostrar-carrito" onClick={() => setMostrarCarrito(!mostrarCarrito)}>
