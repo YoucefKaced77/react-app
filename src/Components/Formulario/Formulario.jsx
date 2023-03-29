@@ -42,22 +42,22 @@ function Formulario() {
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formName">
         <Form.Label>Nombre</Form.Label>
-        <Form.Control type="text" placeholder="Ingresa tu nombre" value={name} onChange={(e) => setName(e.target.value)} />
+        <Form.Control type="text" placeholder="Ingresa tu nombre" value={name} onChange={(e) => setName(e.target.value)} required />
       </Form.Group>
 
       <Form.Group controlId="formPhone">
         <Form.Label>Teléfono</Form.Label>
-        <Form.Control type="tel" placeholder="Ingresa tu teléfono" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <Form.Control type="tel" placeholder="Ingresa tu teléfono" value={phone} onChange={(e) => setPhone(e.target.value)}required />
       </Form.Group>
 
       <Form.Group controlId="formPhone">
         <Form.Label>Código Postal</Form.Label>
-        <Form.Control type="tel" placeholder="Ingresa tu CP" value={cp} onChange={(e) => setCP(e.target.value)} />
+        <Form.Control type="tel" placeholder="Ingresa tu CP" value={cp} onChange={(e) => setCP(e.target.value)} required/>
       </Form.Group>
 
       <Form.Group controlId="formPhone">
         <Form.Label>Dirección Completa</Form.Label>
-        <Form.Control type="tel" placeholder="Ingresa tu dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
+        <Form.Control type="tel" placeholder="Ingresa tu dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} required/>
       </Form.Group>
 
       <Form.Group controlId="paymentOptionSelect">
@@ -81,7 +81,7 @@ function Formulario() {
       </Form.Group>
 
       
-        <RealizarPedido/>
+        <RealizarPedido name={name} cp={cp} phone={phone} direccion={direccion}/>
       
     </Form>
   );
