@@ -6,7 +6,6 @@ import Modal from '@mui/material/Modal';
 import { useContext } from 'react';
 import CestaContext from '../../Store/CestaContext';
 import { useNavigate } from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
 
 const style = {
   position: 'absolute',

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import "./Carrito.css"
 import { useContext } from 'react';
 import CestaContext from "../../Store/CestaContext"
 import loginContext from "../../Store/loginContext"
-import Confirmacion from '../Confirmacion/Confirmacion';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Nav } from 'react-bootstrap';
@@ -16,11 +14,8 @@ function MyVerticallyCenteredModal(props) {
   const setCesta1 = useContext(CestaContext).setCesta1;
 
   const totalCarrito = () => {
-    console.log(cesta1)
-    console.log(cesta1.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0))
     return cesta1.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
   };
-  console.log("esta es la cesta antes de",cesta1)
   const navigate = useNavigate();
     
     return (
@@ -41,17 +36,16 @@ function MyVerticallyCenteredModal(props) {
           <div>
                 {cesta1.map((producto) => (
                   <div className="producto">
-                    <p>{producto.nombre}</p>
-                    <p>${producto.precio}</p>
-                    <p>{producto.cantidad}</p>
+                    <p> Nombre: {producto.nombre}</p> 
+                    <p> , Precio: ${producto.precio}</p>
+                    <p> , Cantidad: {producto.cantidad}</p>
                   </div>
                 ))}
                 <div className="total">
-                  <p>Total:</p>
-                  <p>${totalCarrito()}</p>
+                  <h4>Total: ${totalCarrito()}</h4>
                 </div>
                 <div className="aviso">
-                  <p>¿ Estás seguro ? YA NO HABRÁ VUELTA ATRÁS</p>
+                  <p>¿Estás seguro? YA NO HABRÁ VUELTA ATRÁS</p>
                 </div>
           </div>
           </p>
@@ -124,19 +118,19 @@ function Carrito() {
             <div>
               {cesta1.map((producto) => (
                 <div className="producto">
-                  <p>{producto.nombre}</p>
-                  <p>${producto.precio}</p>
-                  <p>{producto.cantidad}</p>
-                  <button onClick={() => borraloboludo(producto.nombre)}>Eliminar</button>
+                  <p>Nombre: {producto.nombre}</p>
+                  <p>Precio: ${producto.precio}</p>
+                  <p>Cantidad: {producto.cantidad}</p>
+                  <Button variant="primary" onClick={() => borraloboludo(producto.nombre)}>Eliminar</Button>
                 </div>
               ))}
               <div className="total">
-                <p>Total:</p>
-                <p>${totalCarrito()}</p>
+                <p>Total: ${totalCarrito()}</p>
               </div>
-              <button className="vaciar-carrito" onClick={vaciarCarrito}>
+              <Button variant="secondary" onClick={vaciarCarrito}>
                 Vaciar carrito
-              </button>
+              </Button>
+               {'   '}
               <Button variant="primary" onClick={() => {checkear(login);setModalShow(login);}}>
                 Realizar Pedido
               </Button>

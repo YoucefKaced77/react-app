@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import React from 'react';
 import './App.css';
 import Catalogo from "./Components/Catalogo/Catalogo"
@@ -7,19 +6,14 @@ import Carrito from "./Components/Carrito/Carrito";
 import Login from "./Components/Login/Login"
 import MisPedidos from "./Components/Mis pedidos/Mis pedidos"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { createContext } from 'react';
 import { useState } from 'react';
-import { useContext } from 'react';
 import { useEffect } from 'react';
-import Confirmacion from './Components/Confirmacion/Confirmacion';
 import Formulario from './Components/Formulario/Formulario';
 import Footer from "./Components/Footer/Footer";
 import Registro from "./Components/Registro/Registro";
-import Producto from './Components/Producto/Producto';
 import Logout from './Components/Logout/Logout';
 import loginContext from "./Store/loginContext"
 import CestaContext from "./Store/CestaContext"
-import Link from "react-router-dom"
 
 //Compaginar la parte de recarte con la mía  
 //como seccionar la base de datos
@@ -30,8 +24,6 @@ function App() {
   const [login, setLogin] = useState(false);
   const [loginData, setLoginData] = useState({});
   const [loginemail, setLoginEmail] = useState({});
-
-  console.log(login)
 
   const actualizarLogin = (login, loginData) => {
     setLogin(login);

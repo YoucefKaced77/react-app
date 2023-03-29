@@ -1,14 +1,14 @@
+import "./Mis pedidos.css";
 import React, { useState, useEffect } from "react";
-import Producto from "../Producto/Producto";
 import axios from "axios"
 import { useContext } from 'react';
-import CestaContext from "../../Store/CestaContext";
 import loginContext from "../../Store/loginContext"
 import { Button } from "react-bootstrap";
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
 import { Modal } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+import Table from "react-bootstrap/Table";
+import Container from "react-bootstrap/Container";
+import Producto2 from "../Producto2/Producto2"
 
 
 function MisPedidos() {
@@ -30,12 +30,11 @@ function MisPedidos() {
                         preciototal: response.data[Pkey].preciototal,
                         timestamp: (response.data[Pkey].timestamp).toString(),
                         direccion: response.data[Pkey].direccion,
-                        nombre: response.data[Pkey].nombre,
+                        nombre: response.data[Pkey].name,
                         cp: response.data[Pkey].cp,
-                        telefono: response.data[Pkey].telefono,
+                        telefono: response.data[Pkey].phone,
                     })
                 }
-                console.log("pedidos", arrayPedidos)
                 setPedidos(arrayPedidos)
             })
             .catch((error) => {
@@ -50,14 +49,12 @@ function MisPedidos() {
         const handleClose = () => setShow(false);
         const handleShow = () => setShow(true);
 
-        console.log(visualizarpedidos.filter(pedido => pedido.id == id.pedido))
         const cesta = visualizarpedidos.filter(pedido => pedido.id == id.pedido)
-        console.log("esta es la cesta", cesta[0].cesta)
 
         return (
             <>
-                <Button variant="primary" onClick={handleShow}>
-                    Ver detalle del pedido
+                <Button variant="secondary" onClick={handleShow}>
+                    INFO
                 </Button>
 
                 <Modal show={show} onHide={handleClose}>
@@ -67,9 +64,7 @@ function MisPedidos() {
                     <Modal.Body>
                         {cesta[0].cesta.map((pedido) => (
                             <>
-                                <p>Nombre: {pedido.nombre}</p>
-                                <p>Cantidad: {pedido.cantidad}</p>
-                                <p>Precio: {pedido.precio}</p>
+                                <Producto2 nombre={pedido.nombre} cantidad={pedido.cantidad} precio={pedido.precio}></Producto2>
                             </>
                         ))}
                     </Modal.Body>
@@ -94,8 +89,8 @@ function MisPedidos() {
         return (
             <>
 
-            <Button variant="primary" onClick={handleShow}>
-                    BORRAR PEDIDO
+            <Button variant="danger" onClick={handleShow}>
+                    BORRAR
             </Button>
 
             <Modal show={show} onHide={handleClose}>
@@ -103,10 +98,10 @@ function MisPedidos() {
                     <Modal.Title>Borrar Pedido</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Estás seguro???</p>
+                    <p>Esta seguro de que deasea borrar el historico del pedido seleccionado?</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => { handleClose(); si(id); navigate("/") }}>
+                    <Button variant="secondary" onClick={() => { handleClose(); si(id); navigate("/MisPedidos") }}>
                         SÍ
                     </Button>
                 </Modal.Footer>
@@ -120,40 +115,61 @@ function MisPedidos() {
 
 
     function si(id) {
-        console.log("este es el id", id)
-        console.log("este es el toke", localStorage.getItem('loginData'))
         axios.delete('https://react-app-22010-default-rtdb.europe-west1.firebasedatabase.app/Pedidos/' + id.id + '.json?auth=' + localStorage.getItem('loginData'))
             .then((response) => {
                 alert('Pedido borrado');
             }).catch((error) => {
                 alert('No se puede borrar');
             })
-        
     }
-    
 
     return (
         <>
             {login ? (
-                visualizarpedidos.map((pedido) => (
-                    <>
-                        <p>{pedido.id}</p>
-                        <p>{pedido.email}</p>
-                        <p>{pedido.preciototal}</p>
-                        <p>{pedido.timestamp}</p>
-                        <p>{pedido.direccion}</p>
-                        <p>{pedido.nombre}</p>
-                        <p>{pedido.telefono}</p>
-                        <p>{pedido.cp}</p>
-                        <PedidoModal pedido={pedido.id} />
-                        <BorrarPedidomodal id={pedido.id} />
-                        
+                <Container  className="w-70">
+                    <p></p>
+                    <Table striped bordered hover size="sm">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>email</th>
+                                <th>preciototal</th>
+                                <th>timestamp</th>
+                                <th>direccion</th>
+                                <th>nombre</th>
+                                <th>telefono</th>
+                                <th>cp</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {visualizarpedidos.map((pedido) => (
+                                <tr>
+
+                                    <td>{pedido.id}</td>
+                                    <td>{pedido.email}</td>
+                                    <td>{pedido.preciototal}</td>
+                                    <td>{pedido.timestamp}</td>
+                                    <td>{pedido.direccion}</td>
+                                    <td>{pedido.nombre}</td>
+                                    <td>{pedido.telefono}</td>
+                                    <td>{pedido.cp}</td>
+                                    <td><PedidoModal pedido={pedido.id} /> {'   '}</td>
+                                    <td><BorrarPedidomodal id={pedido.id} /></td>
+                                    <p></p>
+                                    
 
 
-                    </>
-                ))
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </Container>
             ) : (
-                <p>No has iniciado sesión</p>
+                <h1 id="mensaje">No has iniciado sesión</h1>
+
+
             )}
         </>
     );

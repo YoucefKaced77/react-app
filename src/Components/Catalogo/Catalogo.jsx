@@ -15,7 +15,6 @@ function Catalogo() {
   const setCesta1 = useContext(CestaContext).setCesta1;
 
   function buscador(name) {
-    console.log(cesta1)
     return cesta1.findIndex(elemento => elemento.nombre === name);
   }
 
@@ -28,7 +27,6 @@ function Catalogo() {
     }
     else {
       const userIndex = buscador(product.nombre);
-      console.log(userIndex)
       if (userIndex === -1) return; // Si el elemento no se encuentra, no hacemos nada
       const updatedCestas = [...cesta1]; // Copiar todo el array
       const updatedCesta = { ...updatedCestas[userIndex] }; // Copiar solo el elemento que queremos actualizar
@@ -41,7 +39,6 @@ function Catalogo() {
   function borraloboludo(product) {
 
     const userIndex = buscador(product.nombre);
-    console.log(userIndex)
     if (userIndex === -1) return; // Si el elemento no se encuentra, no hacemos nada
     const updatedCestas = [...cesta1]; // Copiar todo el array
     const updatedCesta = { ...updatedCestas[userIndex] }; // Copiar solo el elemento que queremos actualizar
@@ -78,7 +75,6 @@ function Catalogo() {
             })
           }
         }
-        console.log(arraySecciones)
         setProducts(arrayProductos);
         setSecciones(arraySecciones);
       })
@@ -102,8 +98,10 @@ function Catalogo() {
           {Abrigos.map((product) => (
             <>
               <Producto nombre={product.nombre} precio={product.precio} imagen={product.imagen} color={product.color} />
-              <Button variant="outline-info" onClick={() => añadilo(product)}>+</Button>
-              <Button variant="outline-warning" onClick={() => borraloboludo(product)}>-</Button>
+              <Button variant="primary" onClick={() => añadilo(product)}>AÑADIR</Button>
+              {'   '}
+              <Button variant="secondary" onClick={() => borraloboludo(product)}>QUITAR</Button>
+              <p></p>
             </>
           ))}
         </Tab>
@@ -111,8 +109,10 @@ function Catalogo() {
           {Accesorios.map((product) => (
             <>
               <Producto nombre={product.nombre} precio={product.precio} imagen={product.imagen} color={product.color} />
-              <Button variant="outline-info" onClick={() => añadilo(product)}>+</Button>
-              <Button variant="outline-warning" onClick={() => borraloboludo(product)}>-</Button>
+              <Button variant="primary" onClick={() => añadilo(product)}>AÑADIR</Button>
+              {'   '}
+              <Button variant="secondary" onClick={() => borraloboludo(product)}>QUITAR</Button>
+              <p></p>
             </>
           ))}
         </Tab>
@@ -120,8 +120,10 @@ function Catalogo() {
           {Camisetas.map((product) => (
             <>
               <Producto nombre={product.nombre} precio={product.precio} imagen={product.imagen} color={product.color} />
-              <Button variant="outline-info" onClick={() => añadilo(product)}>+</Button>
-              <Button variant="outline-warning" onClick={() => borraloboludo(product)}>-</Button>
+              <Button variant="primary" onClick={() => añadilo(product)}>AÑADIR</Button>
+              {'   '}
+              <Button variant="secondary" onClick={() => borraloboludo(product)}>QUITAR</Button>
+              <p></p>
             </>
           ))}
         </Tab>
@@ -129,8 +131,10 @@ function Catalogo() {
           {Pantalones.map((product) => (
             <>
               <Producto nombre={product.nombre} precio={product.precio} imagen={product.imagen} color={product.color} />
-              <Button variant="outline-info" onClick={() => añadilo(product)}>+</Button>
-              <Button variant="outline-warning" onClick={() => borraloboludo(product)}>-</Button>
+              <Button variant="primary" onClick={() => añadilo(product)}>AÑADIR</Button>
+              {'   '}
+              <Button variant="secondary" onClick={() => borraloboludo(product)}>QUITAR</Button>
+              <p></p>
             </>
           ))}
         </Tab>
@@ -138,8 +142,10 @@ function Catalogo() {
           {RopaInterior.map((product) => (
             <>
               <Producto nombre={product.nombre} precio={product.precio} imagen={product.imagen} color={product.color} />
-              <Button variant="outline-info" onClick={() => añadilo(product)}>+</Button>
-              <Button variant="outline-warning" onClick={() => borraloboludo(product)}>-</Button>
+              <Button variant="primary" onClick={() => añadilo(product)}>AÑADIR</Button>
+              {'   '}
+              <Button variant="secondary" onClick={() => borraloboludo(product)}>QUITAR</Button>
+              <p></p>
             </>
           ))}
         </Tab>
@@ -147,8 +153,10 @@ function Catalogo() {
           {Zapatos.map((product) => (
             <>
               <Producto nombre={product.nombre} precio={product.precio} imagen={product.imagen} color={product.color} />
-              <Button variant="outline-info" onClick={() => añadilo(product)}>+</Button>
-              <Button variant="outline-warning" onClick={() => borraloboludo(product)}>-</Button>
+              <Button variant="primary" onClick={() => añadilo(product)}>AÑADIR</Button>
+              {'   '}
+              <Button variant="secondary" onClick={() => borraloboludo(product)}>QUITAR</Button>
+              <p></p>
             </>
           ))}
         </Tab>

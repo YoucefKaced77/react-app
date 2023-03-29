@@ -49,7 +49,7 @@ const Login = (props) => {
                         <Button type='submit' variant="primary">LOGIN</Button>
                     </Col>
                     <Col>
-                        <Button variant="warning" onClick={logoutHandler}>LOGOUT</Button>
+                        <Button variant="secondary" onClick={logoutHandler}>LOGOUT</Button>
                     </Col>
                 </Row>
             </Container>

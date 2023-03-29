@@ -1,0 +1,14 @@
+/* styles.css */
+
+#mensaje {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  #mensaje p {
+    font-size: 24px;
+    color: red;
+    text-align: center;
+  }
