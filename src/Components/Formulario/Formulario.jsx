@@ -17,7 +17,6 @@ function Formulario() {
 
   const [paymentOption, setPaymentOption] = useState('');
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
   const [cp, setCP] = useState('');
@@ -32,7 +31,6 @@ function Formulario() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setName('');
-    setEmail('');
     setPhone('');
     setMessage('');
     setCP("");
@@ -45,11 +43,6 @@ function Formulario() {
       <Form.Group controlId="formName">
         <Form.Label>Nombre</Form.Label>
         <Form.Control type="text" placeholder="Ingresa tu nombre" value={name} onChange={(e) => setName(e.target.value)} />
-      </Form.Group>
-
-      <Form.Group controlId="formEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" placeholder="Ingresa tu email" value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Group>
 
       <Form.Group controlId="formPhone">
@@ -99,12 +92,12 @@ function RealizarPedido(props) {
   const {cesta1} = useContext(CestaContext);
   const setCesta1 = useContext(CestaContext).setCesta1;
 
-  const preciototal=0;
+  const timestamp = Date.now();
 
   
-   const totalCarrito = () => {
-     return cesta1.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
-   };
+  const totalCarrito = () => {
+    return cesta1.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
+  };
 
   
 
@@ -117,7 +110,8 @@ function RealizarPedido(props) {
     cp: props.cp,
     direccion: props.direccion,
     cesta: cesta1,
-    preciototal: totalCarrito()
+    preciototal: totalCarrito(),
+    timestamp: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp)
   }
 
   const [show, setShow] = useState(false);
@@ -141,10 +135,12 @@ function RealizarPedido(props) {
     axios.post('https://react-app-22010-default-rtdb.europe-west1.firebasedatabase.app/Pedidos.json?auth=' + localStorage.getItem('loginData'), arrayPedidos)
       .then((response) => {
         alert('El producto se ha insertado en la base de datos');
-      }).catch((error)=>{
+      })
+      .catch((error)=>{
         alert('No se puede crear');
       })
-    cesta1=[]
+    setCesta1([])
+    
   }
 
   return (
@@ -157,13 +153,8 @@ function RealizarPedido(props) {
         </Modal.Header>
         <Modal.Body>
           <p>Estamos muy agradecidos por su confianza en nuestros productos.</p>
-          <p>Por favor, revise su correo electrónico para más detalles sobre su compra.</p>
+          <p>EN BREVES SERÁ REDIRIGIDO A LA PÁGINA PRINCIPAL.</p>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerrar
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
