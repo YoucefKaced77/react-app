@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-function MyVerticallyCenteredModal(props) {
+function Modal1(props) {
 
   const {cesta1} = useContext(CestaContext);
   const setCesta1 = useContext(CestaContext).setCesta1;
@@ -80,7 +80,6 @@ function Carrito() {
 
   function borraloboludo(id){
     const nuevaCesta = cesta1.filter(producto => producto.nombre !== id);
-    console.log(cesta1)
     setCesta1(nuevaCesta);
   };
 
@@ -135,7 +134,7 @@ function Carrito() {
                 Realizar Pedido
               </Button>
 
-              <MyVerticallyCenteredModal
+              <Modal1
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />

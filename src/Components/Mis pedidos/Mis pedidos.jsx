@@ -146,7 +146,6 @@ function MisPedidos() {
                         <tbody>
                             {visualizarpedidos.map((pedido) => (
                                 <tr>
-
                                     <td>{pedido.id}</td>
                                     <td>{pedido.email}</td>
                                     <td>{pedido.preciototal}</td>
@@ -158,9 +157,6 @@ function MisPedidos() {
                                     <td><PedidoModal pedido={pedido.id} /> {'   '}</td>
                                     <td><BorrarPedidomodal id={pedido.id} /></td>
                                     <p></p>
-                                    
-
-
                                 </tr>
                             ))}
                         </tbody>
